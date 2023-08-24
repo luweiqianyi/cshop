@@ -1,7 +1,7 @@
 ---
 sidebar: auto
 prev: /cshop/01-auth-api.html
-next: false
+next: /cshop/03-acoount-api-01.html
 ---
 # auth-api
 `auth-api`服务，为其他服务提供基于`http`的鉴权服务。

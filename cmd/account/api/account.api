@@ -1,0 +1,65 @@
+syntax = "v1"
+
+info(
+	title: "account-api"
+	desc: "account-api"
+	author: "luweiqianyi"
+	email: "runningriven@gmail.com"
+	version: "1.0.0"
+)
+
+type CommonResp {
+	Success bool   `json:"success"`
+	Detail  string `json:"detail,omitempty"`
+}
+
+type (
+	RegisterReq {
+		AccountName string `json:"accountName"`
+		Password    string `json:"password"`
+	}
+	RegisterResp {
+		CommonResp
+	}
+
+	UnRegisterReq {
+		AccountName string `json:"accountName"`
+	}
+	UnRegisterResp {
+		CommonResp
+	}
+)
+
+type (
+	LoginReq {
+		AccountName string `json:"accountName"`
+		Password    string `json:"password"`
+	}
+
+	LoginResp {
+		CommonResp
+		Token string `json:"token"`
+	}
+
+	LogoutReq {
+		AccountName string `json:"accountName"`
+	}
+
+	LogoutResp {
+		CommonResp
+	}
+)
+
+service account-api {
+	@handler RegisterHandler
+	post /register (RegisterReq) returns (RegisterResp)
+	
+	@handler UnRegisterHandler
+	get /unregister (UnRegisterReq) returns (UnRegisterResp)
+	
+	@handler LoginHandler
+	post /login(LoginReq) returns (LoginResp)
+	
+	@handler LogoutHandler
+	get /logout(LogoutReq) returns (LogoutResp)
+}
