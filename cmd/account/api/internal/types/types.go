@@ -16,7 +16,7 @@ type RegisterResp struct {
 }
 
 type UnRegisterReq struct {
-	AccountName string `json:"accountName"`
+	AccountName string `form:"accountName"`
 }
 
 type UnRegisterResp struct {
@@ -34,7 +34,7 @@ type LoginResp struct {
 }
 
 type LogoutReq struct {
-	AccountName string `json:"accountName"`
+	AccountName string `form:"accountName"`
 }
 
 type LogoutResp struct {

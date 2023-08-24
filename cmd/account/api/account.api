@@ -22,8 +22,9 @@ type (
 		CommonResp
 	}
 
+	//	https://go-zero.dev/docs/tutorials/api/parameter get请求还用form，这个设计挺垃圾的
 	UnRegisterReq {
-		AccountName string `json:"accountName"`
+		AccountName string `form:"accountName"`
 	}
 	UnRegisterResp {
 		CommonResp
@@ -42,7 +43,7 @@ type (
 	}
 
 	LogoutReq {
-		AccountName string `json:"accountName"`
+		AccountName string `form:"accountName"`
 	}
 
 	LogoutResp {
@@ -53,13 +54,13 @@ type (
 service account-api {
 	@handler RegisterHandler
 	post /register (RegisterReq) returns (RegisterResp)
-	
+
 	@handler UnRegisterHandler
 	get /unregister (UnRegisterReq) returns (UnRegisterResp)
-	
+
 	@handler LoginHandler
 	post /login(LoginReq) returns (LoginResp)
-	
+
 	@handler LogoutHandler
 	get /logout(LogoutReq) returns (LogoutResp)
 }
