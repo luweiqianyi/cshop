@@ -29,6 +29,4 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 			Success: true,
 		},
 	}, nil
-
-	return
 }
