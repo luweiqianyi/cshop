@@ -1,0 +1,29 @@
+syntax = "v1"
+
+info(
+	title: "auth-api"
+	desc: "auth-api"
+	author: "luweiqianyi"
+	email: "runningriven@gmail.com"
+	version: "1.0.0"
+)
+
+type CommonResp {
+	Success bool   `json:"success"`
+	Detail  string `json:"detail,omitempty"`
+}
+
+type (
+	AuthReq {
+		AccessToken string `header:"Access-Token"`
+	}
+
+	AuthResp {
+		CommonResp
+	}
+)
+
+service auth-api {
+	@handler AuthHandler
+	get /auth(AuthReq) returns(AuthResp)
+}

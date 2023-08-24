@@ -1,0 +1,1 @@
+goctl api go -api auth.api -dir . -style gozero

@@ -1,5 +1,7 @@
 ---
 sidebar: auto
+prev: /cshop/00-dev-env.html
+next: /cshop/02-auth-api.html
 ---
 # auth-rpc
 1. `auth.proto`定义`rpc`接口
