@@ -1,0 +1,27 @@
+{
+    "name": "doc-site",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "docs:dev": "set NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
+        "docs:build": "set NODE_OPTIONS=--openssl-legacy-provider && vuepress build docs"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/luweiqianyi/cshop.git"
+    },
+    "author": "runningriven@gmail.com",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/luweiqianyi/cshop/issues"
+    },
+    "homepage": "https://github.com/luweiqianyi/cshop#readme",
+    "devDependencies": {
+        "vuepress": "^1.9.10"
+    }
+}

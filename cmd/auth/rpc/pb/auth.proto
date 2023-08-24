@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message TokenValidateReq{
+  string token=1;
+}
+
+message TokenValidateResp{
+  bool ok=1;
+}
+
+message GenerateTokenReq{
+  string accountName=1;
+}
+
+message GenerateTokenResp{
+  bool success=1;
+  string token=2;
+}
+
+service Auth{
+  rpc GenerateToken(GenerateTokenReq) returns(GenerateTokenResp);
+  rpc ValidateToken(TokenValidateReq) returns(TokenValidateResp);
+}
