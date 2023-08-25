@@ -4,3 +4,5 @@ Port: 9003
 
 MySQL:
   DataSource: root:123456@tcp(127.0.0.1:3306)/go_zero_demo?charset=utf8mb4&parseTime=true
+
+Salt: HWVOFkGgPTryzICwd7qnJaZR9KQ2i8xe

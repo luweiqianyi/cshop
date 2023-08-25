@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"cshop/cmd/account/api/model"
+	"cshop/pkg/cryptx"
 	"database/sql"
 	"fmt"
 
@@ -27,13 +28,15 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 }
 
 func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterResp, err error) {
+	encryptedPassword := cryptx.PasswordEncrypt(l.svcCtx.Config.Salt, req.Password)
+
 	record := &model.TbUserAccount{
 		AccountName: sql.NullString{
 			String: req.AccountName,
 			Valid:  true,
 		},
 		Password: sql.NullString{
-			String: req.Password,
+			String: encryptedPassword,
 			Valid:  true,
 		},
 	}
