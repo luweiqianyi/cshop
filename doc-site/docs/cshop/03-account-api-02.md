@@ -1,7 +1,7 @@
 ---
 sidebar: auto
 prev: /cshop/03-account-api-01.html
-next: false
+next: /cshop/03-account-api-03.html
 ---
 # account-api集成mysql
 本文档主要介绍如何在`account-api`服务中引入`mysql`。

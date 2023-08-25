@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"cshop/cmd/auth/rpc/pb"
 	"cshop/pkg/cryptx"
 	"database/sql"
 	"fmt"
@@ -51,9 +52,24 @@ func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err erro
 		}, fmt.Errorf("login failed, password error")
 	}
 
+	rpcResp, err := l.svcCtx.AuthRpcClient.GenerateToken(
+		l.ctx,
+		&pb.GenerateTokenReq{
+			AccountName: req.AccountName,
+		})
+	if err != nil {
+		return &types.LoginResp{
+			CommonResp: types.CommonResp{
+				Success: false,
+				Detail:  fmt.Sprintf("login failed, token generate error, detail: %v", err),
+			},
+		}, fmt.Errorf("login failed, token generate error, detail: %v", err)
+	}
+
 	return &types.LoginResp{
 		CommonResp: types.CommonResp{
 			Success: true,
 		},
+		Token: rpcResp.Token,
 	}, nil
 }
