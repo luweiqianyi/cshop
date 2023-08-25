@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"cshop/cmd/auth/rpc/pb"
 	"database/sql"
 	"fmt"
 
@@ -45,6 +46,13 @@ func (l *UnRegisterLogic) UnRegister(req *types.UnRegisterReq) (resp *types.UnRe
 				Success: false,
 			},
 		}, fmt.Errorf("unregister failed, err: %v", err)
+	}
+
+	_, err = l.svcCtx.AuthRpcClient.DeleteToken(l.ctx, &pb.DeleteTokenReq{
+		AccountName: req.AccountName,
+	})
+	if err != nil {
+		logx.Errorf("unregister: account[%v] delete token failed, err=%v", req.AccountName, err)
 	}
 
 	return &types.UnRegisterResp{
