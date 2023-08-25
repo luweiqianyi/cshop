@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
+	"path/filepath"
 
 	"cshop/cmd/order/rpc/internal/config"
 	"cshop/cmd/order/rpc/internal/server"
@@ -16,10 +18,15 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var configFile = flag.String("f", "etc/order.yaml", "the config file")
+var configFile = flag.String("f", "etc/order-rpc.yaml", "the config file")
 
 func main() {
 	flag.Parse()
+
+	path, _ := os.Executable()
+	dir := filepath.Dir(path)
+	fullPath := filepath.Join(dir, "./etc/order-rpc.yaml")
+	flag.Set("f", fullPath)
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)

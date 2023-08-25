@@ -12,7 +12,7 @@ message OrderInfo {
 // 订单创建请求
 message CreateOrderReq {
   string orderCreatorID=1; // 订单创建者
-  OrderInfo info=2; // 订单的详细信息，供后端进行存库
+  OrderInfo orderInfo=2; // 订单的详细信息，供后端进行存库
 }
 
 // 订单额外信息，由服务端返回的
@@ -34,7 +34,7 @@ message QueryOrderReq {
 // 订单查询响应
 message QueryOrderResp {
   string orderID=1; // 订单ID
-  OrderInfo info=2; // 请求发起者创建时订单时上传给请求处理者关于此次交易的信息
+  OrderInfo orderInfo=2; // 请求发起者创建时订单时上传给请求处理者关于此次交易的信息
   OrderAdditionalInfo orderAdditionalInfo=3; // 订单的额外信息，创建订单时请求处理者关于该订单生成时附带生成的额外信息
 }
 
