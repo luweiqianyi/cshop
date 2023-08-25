@@ -22,7 +22,7 @@ func TestRegister(t *testing.T) {
 	url := fmt.Sprintf("http://%v:%v%v", auth_api_host, port, register)
 
 	resp, err := resty.New().R().
-		SetBody(map[string]interface{}{accountNameKey: "leebai2", passwordKey: "123456"}).
+		SetBody(map[string]interface{}{accountNameKey: "leebai", passwordKey: "123456"}).
 		Post(url)
 	if err != nil {
 		fmt.Printf("err: %v\n", err)
