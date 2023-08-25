@@ -45,3 +45,14 @@ func Get(key string) (string, error) {
 
 	return redisUtil.Get(key)
 }
+
+func Delete(key string) error {
+	redisUtil := getStoreInstance()
+
+	if redisUtil == nil {
+		return fmt.Errorf("redis cli required")
+	}
+
+	_, err := redisUtil.Del(key)
+	return err
+}

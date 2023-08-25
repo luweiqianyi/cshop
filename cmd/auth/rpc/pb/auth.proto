@@ -21,7 +21,16 @@ message GenerateTokenResp{
   string token=2;
 }
 
+message DeleteTokenReq{
+  string accountName=1;
+}
+
+message DeleteTokenResp{
+  bool success=1;
+}
+
 service Auth{
   rpc GenerateToken(GenerateTokenReq) returns(GenerateTokenResp);
   rpc ValidateToken(TokenValidateReq) returns(TokenValidateResp);
+  rpc DeleteToken(DeleteTokenReq) returns(DeleteTokenResp);
 }

@@ -31,3 +31,8 @@ func (s *AuthServer) ValidateToken(ctx context.Context, in *pb.TokenValidateReq)
 	l := logic.NewValidateTokenLogic(ctx, s.svcCtx)
 	return l.ValidateToken(in)
 }
+
+func (s *AuthServer) DeleteToken(ctx context.Context, in *pb.DeleteTokenReq) (*pb.DeleteTokenResp, error) {
+	l := logic.NewDeleteTokenLogic(ctx, s.svcCtx)
+	return l.DeleteToken(in)
+}

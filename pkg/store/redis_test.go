@@ -26,3 +26,44 @@ func TestRedisUtil(t *testing.T) {
 		fmt.Printf("err: %v\n", err)
 	}
 }
+
+func TestSet(t *testing.T) {
+	conf := redis.RedisConf{
+		Host:        "127.0.0.1:6379",
+		Type:        "node",
+		PingTimeout: time.Second * 30,
+	}
+	MustUseRedisStore(conf)
+	err := getStoreInstance().Set("zhangSan", "111")
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+}
+
+func TestGet(t *testing.T) {
+	conf := redis.RedisConf{
+		Host:        "127.0.0.1:6379",
+		Type:        "node",
+		PingTimeout: time.Second * 30,
+	}
+	MustUseRedisStore(conf)
+	val, err := Get("zhangSan")
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+	fmt.Printf("val: %v\n", val)
+}
+
+func TestDelete(t *testing.T) {
+	conf := redis.RedisConf{
+		Host:        "127.0.0.1:6379",
+		Type:        "node",
+		PingTimeout: time.Second * 30,
+	}
+	MustUseRedisStore(conf)
+
+	err := Delete("zhangSan")
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+}

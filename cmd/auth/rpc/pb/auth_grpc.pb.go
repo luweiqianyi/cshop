@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Auth_GenerateToken_FullMethodName = "/pb.Auth/GenerateToken"
 	Auth_ValidateToken_FullMethodName = "/pb.Auth/ValidateToken"
+	Auth_DeleteToken_FullMethodName   = "/pb.Auth/DeleteToken"
 )
 
 // AuthClient is the client API for Auth service.
@@ -29,6 +30,7 @@ const (
 type AuthClient interface {
 	GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenResp, error)
 	ValidateToken(ctx context.Context, in *TokenValidateReq, opts ...grpc.CallOption) (*TokenValidateResp, error)
+	DeleteToken(ctx context.Context, in *DeleteTokenReq, opts ...grpc.CallOption) (*DeleteTokenResp, error)
 }
 
 type authClient struct {
@@ -57,12 +59,22 @@ func (c *authClient) ValidateToken(ctx context.Context, in *TokenValidateReq, op
 	return out, nil
 }
 
+func (c *authClient) DeleteToken(ctx context.Context, in *DeleteTokenReq, opts ...grpc.CallOption) (*DeleteTokenResp, error) {
+	out := new(DeleteTokenResp)
+	err := c.cc.Invoke(ctx, Auth_DeleteToken_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServer is the server API for Auth service.
 // All implementations must embed UnimplementedAuthServer
 // for forward compatibility
 type AuthServer interface {
 	GenerateToken(context.Context, *GenerateTokenReq) (*GenerateTokenResp, error)
 	ValidateToken(context.Context, *TokenValidateReq) (*TokenValidateResp, error)
+	DeleteToken(context.Context, *DeleteTokenReq) (*DeleteTokenResp, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -75,6 +87,9 @@ func (UnimplementedAuthServer) GenerateToken(context.Context, *GenerateTokenReq)
 }
 func (UnimplementedAuthServer) ValidateToken(context.Context, *TokenValidateReq) (*TokenValidateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateToken not implemented")
+}
+func (UnimplementedAuthServer) DeleteToken(context.Context, *DeleteTokenReq) (*DeleteTokenResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteToken not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 
@@ -125,6 +140,24 @@ func _Auth_ValidateToken_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Auth_DeleteToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTokenReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).DeleteToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_DeleteToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).DeleteToken(ctx, req.(*DeleteTokenReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -139,6 +172,10 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateToken",
 			Handler:    _Auth_ValidateToken_Handler,
+		},
+		{
+			MethodName: "DeleteToken",
+			Handler:    _Auth_DeleteToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

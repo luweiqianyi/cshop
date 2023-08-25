@@ -13,6 +13,8 @@ import (
 )
 
 type (
+	DeleteTokenReq    = pb.DeleteTokenReq
+	DeleteTokenResp   = pb.DeleteTokenResp
 	GenerateTokenReq  = pb.GenerateTokenReq
 	GenerateTokenResp = pb.GenerateTokenResp
 	TokenValidateReq  = pb.TokenValidateReq
@@ -21,6 +23,7 @@ type (
 	Auth interface {
 		GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenResp, error)
 		ValidateToken(ctx context.Context, in *TokenValidateReq, opts ...grpc.CallOption) (*TokenValidateResp, error)
+		DeleteToken(ctx context.Context, in *DeleteTokenReq, opts ...grpc.CallOption) (*DeleteTokenResp, error)
 	}
 
 	defaultAuth struct {
@@ -42,4 +45,9 @@ func (m *defaultAuth) GenerateToken(ctx context.Context, in *GenerateTokenReq, o
 func (m *defaultAuth) ValidateToken(ctx context.Context, in *TokenValidateReq, opts ...grpc.CallOption) (*TokenValidateResp, error) {
 	client := pb.NewAuthClient(m.cli.Conn())
 	return client.ValidateToken(ctx, in, opts...)
+}
+
+func (m *defaultAuth) DeleteToken(ctx context.Context, in *DeleteTokenReq, opts ...grpc.CallOption) (*DeleteTokenResp, error) {
+	client := pb.NewAuthClient(m.cli.Conn())
+	return client.DeleteToken(ctx, in, opts...)
 }
