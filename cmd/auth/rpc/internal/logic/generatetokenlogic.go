@@ -4,7 +4,7 @@ import (
 	"context"
 	"cshop/cmd/auth/rpc/entity"
 	"cshop/cmd/auth/rpc/store"
-	"cshop/pkg/token"
+	"cshop/cmd/auth/rpc/token"
 	"fmt"
 	"time"
 
