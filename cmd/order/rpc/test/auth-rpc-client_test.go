@@ -12,7 +12,7 @@ import (
 
 func TestRpcClientSendCreateOrderRequest(t *testing.T) {
 	c := zrpc.RpcClientConf{
-		Target: "127.0.0.1:9004", // gateway-rpc服务端地址
+		Target: "127.0.0.1:9004", // order-rpc服务端地址
 	}
 	client := orderrpcservice.NewOrderRPCService(zrpc.MustNewClient(c))
 	resp, err := client.CreateOrder(

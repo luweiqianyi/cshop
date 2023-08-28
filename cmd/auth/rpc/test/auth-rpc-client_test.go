@@ -12,7 +12,7 @@ import (
 
 func TestRpcClientSendValidateTokenRequest(t *testing.T) {
 	c := zrpc.RpcClientConf{
-		Target: "127.0.0.1:9000", // gateway-rpc服务端地址
+		Target: "127.0.0.1:9000", // auth-rpc服务端地址
 	}
 	client := auth.NewAuth(zrpc.MustNewClient(c))
 	resp, err := client.ValidateToken(context.Background(), &pb.TokenValidateReq{
@@ -23,7 +23,7 @@ func TestRpcClientSendValidateTokenRequest(t *testing.T) {
 
 func TestRpcClientSendGenerateTokenRequest(t *testing.T) {
 	c := zrpc.RpcClientConf{
-		Target: "127.0.0.1:9000", // gateway-rpc服务端地址
+		Target: "127.0.0.1:9000", // auth-rpc服务端地址
 	}
 	client := auth.NewAuth(zrpc.MustNewClient(c))
 
@@ -37,7 +37,7 @@ func TestRpcClientSendGenerateTokenRequest(t *testing.T) {
 
 func TestRpcClientSendDeleteTokenRequest(t *testing.T) {
 	c := zrpc.RpcClientConf{
-		Target: "127.0.0.1:9000", // gateway-rpc服务端地址
+		Target: "127.0.0.1:9000", // auth-rpc服务端地址
 	}
 	client := auth.NewAuth(zrpc.MustNewClient(c))
 
