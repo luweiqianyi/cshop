@@ -46,3 +46,21 @@ func (m *MemoryStore) Query(orderID string) (entity.Order, error) {
 	}
 	return ret, nil
 }
+
+func (m *MemoryStore) UpdateOrderState(orderID string, status int) error {
+	order, found := m.orderMap.Load(orderID)
+	if !found {
+		return fmt.Errorf("update order status: order[%v] not exist", orderID)
+	}
+
+	ret, ok := order.(entity.Order)
+	if !ok {
+		return fmt.Errorf("update order status: order[%v] format error", orderID)
+	}
+
+	ret.OrderStatus = status
+
+	m.orderMap.Store(orderID, ret)
+
+	return nil
+}

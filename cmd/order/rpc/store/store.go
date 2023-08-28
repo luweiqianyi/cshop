@@ -7,4 +7,5 @@ type OrderStore interface {
 	Add(orderID string, order entity.Order) error
 	Delete(orderID string) error
 	Query(orderID string) (entity.Order, error)
+	UpdateOrderState(orderID string, status int) error
 }
