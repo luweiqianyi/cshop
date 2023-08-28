@@ -43,7 +43,7 @@ func (l *CreateOrderLogic) CreateOrder(in *pb.CreateOrderReq) (*pb.CreateOrderRe
 		return &pb.CreateOrderResp{}, fmt.Errorf("create order failed, err: %v", err)
 	}
 
-	// 启动协程模拟订单到期，自动删除订单的业务过程
+	// 模拟订单到期，处理订单的业务过程
 	go func(ctx context.Context, orderID string) {
 		ticker := time.NewTicker(orderCloseTime)
 		for {
