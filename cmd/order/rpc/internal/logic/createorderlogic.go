@@ -2,9 +2,13 @@ package logic
 
 import (
 	"context"
-
 	"cshop/cmd/order/rpc/internal/svc"
 	"cshop/cmd/order/rpc/pb"
+	"cshop/cmd/order/rpc/store"
+	"cshop/cmd/order/rpc/store/entity"
+	"cshop/cmd/order/rpc/util"
+	"fmt"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +28,22 @@ func NewCreateOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Creat
 }
 
 func (l *CreateOrderLogic) CreateOrder(in *pb.CreateOrderReq) (*pb.CreateOrderResp, error) {
-	// todo: add your logic here and delete this line
+	orderID := util.OrderIdGenerator().OrderID("Common")
+	ts := time.Now().UnixMilli()
 
-	return &pb.CreateOrderResp{}, nil
+	err := store.MemStoreInstance().Add(orderID, entity.Order{
+		OrderID:           orderID,
+		OrderCreatorID:    in.OrderCreatorID,
+		CreateTimestampMs: ts,
+	})
+	if err != nil {
+		return &pb.CreateOrderResp{}, fmt.Errorf("create order failed, err: %v", err)
+	}
+
+	return &pb.CreateOrderResp{
+		OrderID: orderID,
+		OrderAdditionalInfo: &pb.OrderAdditionalInfo{
+			CreateTimestamp: ts,
+		},
+	}, nil
 }

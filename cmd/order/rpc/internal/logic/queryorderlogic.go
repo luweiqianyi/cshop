@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"cshop/cmd/order/rpc/store"
+	"fmt"
 
 	"cshop/cmd/order/rpc/internal/svc"
 	"cshop/cmd/order/rpc/pb"
@@ -24,7 +26,16 @@ func NewQueryOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryO
 }
 
 func (l *QueryOrderLogic) QueryOrder(in *pb.QueryOrderReq) (*pb.QueryOrderResp, error) {
-	// todo: add your logic here and delete this line
+	order, err := store.MemStoreInstance().Query(in.OrderID)
+	if err != nil {
+		return &pb.QueryOrderResp{}, fmt.Errorf("query order failed, err: %v", err)
+	}
 
-	return &pb.QueryOrderResp{}, nil
+	return &pb.QueryOrderResp{
+		OrderID:   order.OrderID,
+		OrderInfo: &pb.OrderInfo{},
+		OrderAdditionalInfo: &pb.OrderAdditionalInfo{
+			CreateTimestamp: order.CreateTimestampMs,
+		},
+	}, nil
 }
