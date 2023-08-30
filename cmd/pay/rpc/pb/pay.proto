@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message PayReq{
+  string orderID = 1;
+}
+
+message PayResp{
+  bool success = 1;
+}
+
+service PayService{
+  rpc StartupPay(PayReq) returns(PayResp);
+}
