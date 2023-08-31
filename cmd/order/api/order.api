@@ -1,0 +1,40 @@
+syntax = "v1"
+
+info(
+	title: "order-api"
+	desc: "order-api"
+	author: "luweiqianyi"
+	email: "runningriven@gmail.com"
+	version: "1.0.0"
+)
+
+type CommonResp {
+	Success bool   `json:"success"`
+	Detail  string `json:"detail,omitempty"`
+}
+
+type (
+	CommitOrderReq {
+		ProductName   string `json:"productName"`
+		ProductNumber int32  `json:"productNumber"`
+		// TODO 商品属性要不要加，就算加了也不知道要加几个，不同的商品不一样啊，先不加
+		PayMethod            int32  `json:"payMethod"`
+		DeliveryMethod       int32  `json:"deliveryMethod"`
+		ExpectedDeliveryTime string `json:"expectedDeliveryTime"`
+	}
+
+	CommitOrderResp {
+		CommonResp
+		OrderID string `json:"orderID"`
+	}
+)
+
+//@server(
+//    jwt: Auth
+//    group: template
+//)
+
+service order {
+	@handler CommitOrderHandler
+	post /commitOrder(CommitOrderReq) returns (CommitOrderResp)
+}
