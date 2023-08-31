@@ -2,3 +2,5 @@
 /cmd/auth/rpc/auth-rpc.exe
 /cmd/auth/api/auth-api.exe
 /cmd/account/api/account-api.exe
+/cmd/order/api/order-api.exe
+/cmd/order/rpc/order-rpc.exe
