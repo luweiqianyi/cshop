@@ -20,7 +20,11 @@ func TestRpcClientSendCreateOrderRequest(t *testing.T) {
 		&pb.CreateOrderReq{
 			OrderCreatorID: "1",
 			OrderInfo: &orderrpcservice.OrderInfo{
-				Info: "simulate information of order",
+				ProductName:          "iphone13 pro",
+				ProductNumber:        2,
+				PayMethod:            1,
+				DeliveryMethod:       1,
+				ExpectedDeliveryTime: "2023-01-02,09:00-21:00",
 			},
 		},
 	)
@@ -38,7 +42,11 @@ func TestRpcClientSendQueryOrderRequest(t *testing.T) {
 		&pb.CreateOrderReq{
 			OrderCreatorID: "1",
 			OrderInfo: &orderrpcservice.OrderInfo{
-				Info: "simulate information of order",
+				ProductName:          "iphone13 pro",
+				ProductNumber:        2,
+				PayMethod:            1,
+				DeliveryMethod:       1,
+				ExpectedDeliveryTime: "2023-01-02,09:00-21:00",
 			},
 		},
 	)

@@ -6,7 +6,11 @@ package pb;
 
 // 模拟订单详细信息
 message OrderInfo {
-  string info=1;
+  string productName=1;
+  int32 productNumber=2;
+  int32 payMethod=3;
+  int32 deliveryMethod=4;
+  string expectedDeliveryTime=5;
 }
 
 // 订单创建请求
