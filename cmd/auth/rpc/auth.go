@@ -1,7 +1,7 @@
 package main
 
 import (
-	"cshop/pkg/store"
+	redis2 "cshop/pkg/store/redis"
 	"flag"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -39,7 +39,7 @@ func main() {
 	conf.MustLoad(*redisConfigFile, &redisConf)
 	redisConf.PingTimeout = time.Second * 60
 	logx.Infof("redis config: %#v", redisConf)
-	store.MustUseRedisStore(redisConf)
+	redis2.MustUseRedisStore(redisConf)
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
