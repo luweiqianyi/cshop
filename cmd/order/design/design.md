@@ -48,7 +48,9 @@ select count(*) from `phone_table` where productName='iphone13 pro' and color = 
 | deliveryMethod | 1 | int | 配送方式 |
 | expectedDeliveryTime| 2023-01-02,09:00-21:00 | string | 期望配送时间 |
 > 价格的计算不放在前端计算，由后端的其他服务(可能是计算服务，可能是商品服务，可能是订单服务,暂时先不决定)来完成计算。这里只负责将用户的订购详情上传到服务端。
- 
+> 前端请求的token经过auth统一鉴权服务校验后，会向后端api服务返回accountName。
+* TODO thick: 请求的设计是否要加入propertity1、propertity2、propertity3这三个参数，因为不同的商品可能属性个数不同，并且属性key、value会不一样
+
 ### 服务端设计
 #### 订单属性
 以下表的属性设计用于在用户对某个订单进行查询时，展现给用户的信息。
